@@ -1,0 +1,12 @@
+---
+global:
+  meshID: mesh1
+  multiCluster:
+    clusterName: cluster1
+  network: network1
+  image:
+    pullPolicy: IfNotPresent
+    proxy:
+      repository: docker.io/istio/proxyv2
+    istiod:
+      repository: docker.io/istio/istiod
