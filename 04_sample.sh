@@ -18,3 +18,7 @@ kubectl apply -f ./samples/helloworld.yaml -l version=v2 -n istio-sample --conte
 
 kubectl apply -f ./samples/sleep.yaml -n istio-sample --context=kind-cluster1
 kubectl apply -f ./samples/sleep.yaml -n istio-sample --context=kind-cluster2
+
+# setup loadbalancer
+kubectl patch svc helloworld -n istio-sample -p '{"spec":{"type":"LoadBalancer"}}' --context kind-cluster1
+kubectl patch svc helloworld -n istio-sample -p '{"spec":{"type":"LoadBalancer"}}' --context kind-cluster2

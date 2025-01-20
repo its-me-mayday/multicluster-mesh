@@ -11,3 +11,7 @@ istioctl create-remote-secret --context=kind-cluster2 --name=cluster2 > ./cluste
 # after edit clusterX/api-server.yaml
 kubectl apply -f cluster1/api-server.yaml -n istio-system --context=kind-cluster2
 kubectl apply -f cluster2/api-server.yaml -n istio-system --context=kind-cluster1
+
+# after applying samples - test
+kubectl get svc -n istio-sample helloworld
+curl external-ip:port/hello
