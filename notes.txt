@@ -1,2 +1,13 @@
 docker exec -it clusterX-worker bash
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
+---
+# after gateway
+istioctl create-remote-secret --context=kind-cluster1 --name=cluster1 > ./cluster1/api-server.yaml
+istioctl create-remote-secret --context=kind-cluster2 --name=cluster2 > ./cluster2/api-server.yaml
+
+# edit clusterX/api-server.yaml
+# https://control-plane-clusterX:6443
+
+# after edit clusterX/api-server.yaml
+kubectl apply -f cluster1/api-server.yaml -n istio-system --context=kind-cluster2
+kubectl apply -f cluster2/api-server.yaml -n istio-system --context=kind-cluster1
